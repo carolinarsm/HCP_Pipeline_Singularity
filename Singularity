@@ -9,19 +9,19 @@ yum -y install git scipy numpy expat-devel libX11-devel mesa-libGL-devel zlib-de
 
 
 #installing the packages here
-    ##############
-    # freesurfer #
-    ##############
-    wget -4 --no-verbose --output-document=/root/freesurfer.tar.gz https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.1/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.1.tar.gz
-    tar -C /opt -xzvf /root/freesurfer.tar.gz
-    rm /root/freesurfer.tar.gz
+   	##############
+	# freesurfer #
+      	##############
+	wget -4 --no-verbose --output-document=/root/freesurfer.tar.gz https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.1/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.1.tar.gz
+    	tar -C /opt -xzvf /root/freesurfer.tar.gz
+    	rm /root/freesurfer.tar.gz
 
-    #######
-    # fsl #
-    #######
-    wget -4 --output-document=/root/fslinstaller.py https://fsl.fmrib.ox.ac.uk/fsldownloads/fslinstaller.py 
-    python /root/fslinstaller.py -p -V 6.0.1 -d /opt/fsl
-    rm /root/fslinstaller.py
+        #######
+    	# fsl #
+    	#######
+    	wget -4 --output-document=/root/fslinstaller.py https://fsl.fmrib.ox.ac.uk/fsldownloads/fslinstaller.py 
+    	python /root/fslinstaller.py -p -V 6.0.1 -d /opt/fsl
+    	rm /root/fslinstaller.py
 
 	##########
 	# Connectome
@@ -34,8 +34,8 @@ yum -y install git scipy numpy expat-devel libX11-devel mesa-libGL-devel zlib-de
 	# University of Washington Gradunwrap
 	######
 	wget -4 -O /root/wu_gw_1.1.0.tar.gz https://github.com/Washington-University/gradunwarp/archive/v1.1.0.tar.gz
-	tar -C /root -zxvf /root/wu_gw_1.1.0.tar.gz 
-	cd /root/gradunwarp-1.1.0/
+	tar -C /opt -zxvf /root/wu_gw_1.1.0.tar.gz 
+	cd /opt/gradunwarp-1.1.0/
 	python setup.py install
 	rm /root/wu_gw_1.1.0.tar.gz 
 		
@@ -51,12 +51,20 @@ yum -y install git scipy numpy expat-devel libX11-devel mesa-libGL-devel zlib-de
 	wget -4 -O /root/fix.tar.gz http://www.fmrib.ox.ac.uk/~steve/ftp/fix.tar.gz
 	tar -C /opt/fsl -zxvf /root/fix.tar.gz
 
-###Grabing license files
+	######
+	#HCP Pipelines
+	#####
+	wget -4 -O /root/ https://github.com/Washington-University/HCPpipelines/archive/v4.0.0.tar.gz
+	tar -C /opt -xzvf /root/hcp_pipelines_v4.0.0.tar.gz
+	rm /root/hcp_pipelines_v4.0.0.tar.gz
+
+
+	###Grabing license files
 	cd /root
 	git clone https://github.com/romxero/HCP_Pipeline_Singulartiy.git
 	cp /root/HCP_Pipeline_Singulartiy/license.txt /opt/freesurfer/license.txt
 
-%environment 
+%environment
 ##Placing key environment things here 
     export NO_FSFAST=1
     export FREESURFER_HOME=/opt/freesurfer
@@ -68,7 +76,8 @@ yum -y install git scipy numpy expat-devel libX11-devel mesa-libGL-devel zlib-de
     export PATH=$FSLDIR/bin_rh_linux64:$PATH
     export PATH=/opt/msm/bin:$PATH
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/workbench/libs_rh_linux64
-    
+    export HCPPIPEDIR=/opt/HCPpipelines-4.0.0
+
 
 
 #    License https://surfer.nmr.mgh.harvard.edu/fswiki/FreeSurferSoftwareLicense
