@@ -1,0 +1,5 @@
+# excluding
+.*~
+/sing_defmod/
+/singularity_hcp/
+/archive/
