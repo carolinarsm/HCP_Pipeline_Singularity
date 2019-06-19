@@ -3,3 +3,6 @@
 /sing_defmod/
 /singularity_hcp/
 /archive/
+/hcp_container/
+dev_*
+*local*
