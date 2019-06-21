@@ -6,9 +6,6 @@ From: pndni/centos7-base:1.2.0
 #MirrorURL: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/x86_64/
 #Include: yum
 
-%setup
-	export PCKGDIR=/media/sf_mydev/sandbox
-	mkdir ${SINGULARITY_ROOTFS}/temp_source
 
 %files
 	/media/sf_mydev/sandbox/fix.tar.gz /root
@@ -23,7 +20,7 @@ From: pndni/centos7-base:1.2.0
 
 %post
 
-	yum -y install git scipy numpy expat-devel libX11-devel mesa-libGL-devel zlib-devel libpng12 libmng sudo
+	yum -y install git scipy numpy expat-devel libX11-devel mesa-libGL-devel zlib-devel libpng12 libmng sudo freetype
 	yum -y update
 
 
@@ -56,7 +53,7 @@ From: pndni/centos7-base:1.2.0
 	rm /root/hcp_pipelines_v4.0.0.tar.gz
 	
 
-    #### fsl ####
+	#### fsl ####
 
 	python /root/fslinstaller.py -p -V 6.0.1 -d /opt/fsl
 	rm /root/fslinstaller.py
@@ -85,7 +82,6 @@ From: pndni/centos7-base:1.2.0
 	#### Grabbing license files ####
 
 	#cd /root
-	#git clone https://github.com/romxero/HCP_Pipeline_Singulartiy.git
 	mv /root/license.txt /opt/freesurfer/license.txt
 	chmod 755 /opt/freesurfer/license.txt
 
@@ -109,7 +105,7 @@ From: pndni/centos7-base:1.2.0
 	# Set up specific environment variables for the HCP Pipeline
 
 	export HCPPIPEDIR=/opt/HCPpipelines-4.0.0
-	export CARET7DIR=/opt/workbench
+	export CARET7DIR=/opt/workbench/bin_rh_linux64
 	export MSMBINDIR=/opt/msm/bin
 	export MSMCONFIGDIR=${HCPPIPEDIR}/MSMConfig
 	export MATLAB_COMPILER_RUNTIME=
